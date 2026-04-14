@@ -1,3 +1,11 @@
+// Preloader
+window.addEventListener('load', () => {
+    const preloader = document.getElementById('preloader');
+    setTimeout(() => {
+        preloader.classList.add('hidden');
+    }, 1000);
+});
+
 // Mobile menu toggle
 const mobileMenuBtn = document.getElementById('mobile-menu-btn');
 const mobileMenu = document.getElementById('mobile-menu');
@@ -40,7 +48,56 @@ window.addEventListener('scroll', () => {
     }
 });
 
-// Intersection Observer for fade-in animations
+// Project filtering
+const filterBtns = document.querySelectorAll('.filter-btn');
+const projectItems = document.querySelectorAll('.project-item');
+
+filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+        // Remove active class from all buttons
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        
+        const filter = btn.getAttribute('data-filter');
+        
+        projectItems.forEach(item => {
+            if (filter === 'all' || item.getAttribute('data-category') === filter) {
+                item.style.display = 'block';
+                setTimeout(() => {
+                    item.style.opacity = '1';
+                    item.style.transform = 'scale(1)';
+                }, 10);
+            } else {
+                item.style.opacity = '0';
+                item.style.transform = 'scale(0.8)';
+                setTimeout(() => {
+                    item.style.display = 'none';
+                }, 300);
+            }
+        });
+    });
+});
+
+// Progress bars animation
+const progressBars = document.querySelectorAll('.progress-fill');
+const progressObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            const bar = entry.target;
+            const width = bar.getAttribute('data-width');
+            setTimeout(() => {
+                bar.style.width = width + '%';
+            }, 200);
+            progressObserver.unobserve(bar);
+        }
+    });
+}, { threshold: 0.5 });
+
+progressBars.forEach(bar => {
+    progressObserver.observe(bar);
+});
+
+// Enhanced Intersection Observer for animations
 const observerOptions = {
     threshold: 0.1,
     rootMargin: '0px 0px -50px 0px'
@@ -60,12 +117,89 @@ document.querySelectorAll('section').forEach(section => {
     observer.observe(section);
 });
 
-// Contact form handling
+// Enhanced contact form handling with validation
 const contactForm = document.getElementById('contact-form');
 const successMessage = document.getElementById('success-message');
 
+// Form validation
+function validateForm() {
+    const name = document.getElementById('name').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const subject = document.getElementById('subject').value.trim();
+    const message = document.getElementById('message').value.trim();
+    
+    let isValid = true;
+    
+    // Name validation
+    if (name.length < 2) {
+        showError('name', 'Name must be at least 2 characters');
+        isValid = false;
+    } else {
+        clearError('name');
+    }
+    
+    // Email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+        showError('email', 'Please enter a valid email address');
+        isValid = false;
+    } else {
+        clearError('email');
+    }
+    
+    // Subject validation
+    if (subject.length < 3) {
+        showError('subject', 'Subject must be at least 3 characters');
+        isValid = false;
+    } else {
+        clearError('subject');
+    }
+    
+    // Message validation
+    if (message.length < 10) {
+        showError('message', 'Message must be at least 10 characters');
+        isValid = false;
+    } else {
+        clearError('message');
+    }
+    
+    return isValid;
+}
+
+function showError(fieldId, message) {
+    const field = document.getElementById(fieldId);
+    field.classList.add('border-red-500');
+    
+    // Remove existing error message
+    const existingError = field.parentNode.querySelector('.error-message');
+    if (existingError) {
+        existingError.remove();
+    }
+    
+    // Add error message
+    const errorDiv = document.createElement('div');
+    errorDiv.className = 'error-message text-red-500 text-sm mt-1';
+    errorDiv.textContent = message;
+    field.parentNode.appendChild(errorDiv);
+}
+
+function clearError(fieldId) {
+    const field = document.getElementById(fieldId);
+    field.classList.remove('border-red-500');
+    
+    // Remove error message
+    const errorDiv = field.parentNode.querySelector('.error-message');
+    if (errorDiv) {
+        errorDiv.remove();
+    }
+}
+
 contactForm.addEventListener('submit', (e) => {
     e.preventDefault();
+    
+    if (!validateForm()) {
+        return;
+    }
     
     // Get form data
     const formData = {
@@ -88,6 +222,13 @@ contactForm.addEventListener('submit', (e) => {
     setTimeout(() => {
         successMessage.classList.add('hidden');
     }, 5000);
+});
+
+// Real-time validation
+document.querySelectorAll('#contact-form input, #contact-form textarea').forEach(field => {
+    field.addEventListener('blur', () => {
+        validateForm();
+    });
 });
 
 // Add typing effect to hero section
@@ -184,6 +325,27 @@ const counterObserver = new IntersectionObserver((entries) => {
 // Observe counter elements
 document.querySelectorAll('[data-counter]').forEach(counter => {
     counterObserver.observe(counter);
+});
+
+// Floating Action Button
+const fab = document.getElementById('fab');
+
+fab.addEventListener('click', () => {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+});
+
+// Show/hide FAB based on scroll
+window.addEventListener('scroll', () => {
+    if (window.scrollY > 300) {
+        fab.style.opacity = '1';
+        fab.style.pointerEvents = 'auto';
+    } else {
+        fab.style.opacity = '0';
+        fab.style.pointerEvents = 'none';
+    }
 });
 
 // Add loading animation

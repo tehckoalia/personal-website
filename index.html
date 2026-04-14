@@ -59,6 +59,184 @@
             50% { border-color: #667eea; }
         }
         
+        /* Preloader Styles */
+        .preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+        
+        .preloader.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        .loader {
+            width: 50px;
+            height: 50px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-top: 3px solid white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Enhanced Animations */
+        .slide-in-left {
+            animation: slideInLeft 0.8s ease-out;
+        }
+        
+        .slide-in-right {
+            animation: slideInRight 0.8s ease-out;
+        }
+        
+        .scale-in {
+            animation: scaleIn 0.6s ease-out;
+        }
+        
+        @keyframes slideInLeft {
+            from {
+                transform: translateX(-100px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        
+        @keyframes scaleIn {
+            from {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+        
+        /* Progress Bar Styles */
+        .progress-bar {
+            background: #e5e7eb;
+            border-radius: 10px;
+            overflow: hidden;
+            height: 8px;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            border-radius: 10px;
+            transition: width 1.5s ease;
+            width: 0;
+        }
+        
+        /* Floating Action Button */
+        .fab {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(102, 126, 234, 0.4);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+        
+        .fab:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 30px rgba(102, 126, 234, 0.6);
+        }
+        
+        /* Testimonial Card */
+        .testimonial-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .testimonial-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+        
+        .quote-mark {
+            font-size: 60px;
+            color: #667eea;
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            opacity: 0.2;
+        }
+        
+        /* Blog Card */
+        .blog-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .blog-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+        
+        /* Filter Buttons */
+        .filter-btn {
+            padding: 8px 20px;
+            border: 2px solid #667eea;
+            background: white;
+            color: #667eea;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            transform: scale(1.05);
+        }
+        
         .nav-link {
             position: relative;
             transition: color 0.3s ease;
@@ -85,6 +263,10 @@
     </style>
 </head>
 <body class="bg-gray-50 scroll-smooth">
+    <!-- Preloader -->
+    <div class="preloader" id="preloader">
+        <div class="loader"></div>
+    </div>
     <!-- Navigation -->
     <nav class="fixed top-0 w-full bg-white/90 backdrop-blur-md shadow-sm z-50">
         <div class="container mx-auto px-6 py-4">
@@ -95,6 +277,8 @@
                     <a href="#about" class="nav-link text-gray-700 hover:text-purple-600">About</a>
                     <a href="#projects" class="nav-link text-gray-700 hover:text-purple-600">Projects</a>
                     <a href="#skills" class="nav-link text-gray-700 hover:text-purple-600">Skills</a>
+                    <a href="#testimonials" class="nav-link text-gray-700 hover:text-purple-600">Testimonials</a>
+                    <a href="#blog" class="nav-link text-gray-700 hover:text-purple-600">Blog</a>
                     <a href="#contact" class="nav-link text-gray-700 hover:text-purple-600">Contact</a>
                 </div>
                 <button id="mobile-menu-btn" class="md:hidden text-gray-700">
@@ -109,6 +293,8 @@
                 <a href="#about" class="block text-gray-700 hover:text-purple-600">About</a>
                 <a href="#projects" class="block text-gray-700 hover:text-purple-600">Projects</a>
                 <a href="#skills" class="block text-gray-700 hover:text-purple-600">Skills</a>
+                <a href="#testimonials" class="block text-gray-700 hover:text-purple-600">Testimonials</a>
+                <a href="#blog" class="block text-gray-700 hover:text-purple-600">Blog</a>
                 <a href="#contact" class="block text-gray-700 hover:text-purple-600">Contact</a>
             </div>
         </div>
@@ -193,9 +379,18 @@
     <section id="projects" class="py-20 bg-gray-50">
         <div class="container mx-auto px-6">
             <h2 class="text-4xl font-bold text-center mb-16 gradient-text">Featured Projects</h2>
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            
+            <!-- Filter Buttons -->
+            <div class="flex flex-wrap justify-center gap-4 mb-12">
+                <button class="filter-btn active" data-filter="all">All Projects</button>
+                <button class="filter-btn" data-filter="web">Web Development</button>
+                <button class="filter-btn" data-filter="mobile">Mobile Apps</button>
+                <button class="filter-btn" data-filter="design">UI/UX Design</button>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8" id="projects-grid">
                 <!-- Project 1 -->
-                <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover">
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover project-item" data-category="web">
                     <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Project 1" class="w-full h-48 object-cover">
                     <div class="p-6">
                         <h3 class="text-xl font-bold mb-2 text-gray-800">E-Commerce Platform</h3>
@@ -213,7 +408,7 @@
                 </div>
 
                 <!-- Project 2 -->
-                <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover">
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover project-item" data-category="mobile">
                     <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Project 2" class="w-full h-48 object-cover">
                     <div class="p-6">
                         <h3 class="text-xl font-bold mb-2 text-gray-800">Task Management App</h3>
@@ -231,7 +426,7 @@
                 </div>
 
                 <!-- Project 3 -->
-                <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover">
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover project-item" data-category="design">
                     <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Project 3" class="w-full h-48 object-cover">
                     <div class="p-6">
                         <h3 class="text-xl font-bold mb-2 text-gray-800">Digital Art Portfolio</h3>
@@ -255,35 +450,202 @@
     <section id="skills" class="py-20 bg-white">
         <div class="container mx-auto px-6">
             <h2 class="text-4xl font-bold text-center mb-16 gradient-text">Skills & Expertise</h2>
-            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <div class="text-center">
-                    <div class="w-20 h-20 mx-auto mb-4 bg-purple-100 rounded-full flex items-center justify-center">
-                        <i class="fas fa-code text-3xl text-purple-600"></i>
+            <div class="max-w-4xl mx-auto">
+                <div class="grid md:grid-cols-2 gap-8 mb-12">
+                    <div class="space-y-6">
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <h3 class="text-lg font-semibold text-gray-800">Frontend Development</h3>
+                                <span class="text-purple-600 font-bold">90%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" data-width="90"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <h3 class="text-lg font-semibold text-gray-800">Backend Development</h3>
+                                <span class="text-purple-600 font-bold">85%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" data-width="85"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <h3 class="text-lg font-semibold text-gray-800">UI/UX Design</h3>
+                                <span class="text-purple-600 font-bold">80%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" data-width="80"></div>
+                            </div>
+                        </div>
                     </div>
-                    <h3 class="text-xl font-bold mb-2 text-gray-800">Frontend Development</h3>
-                    <p class="text-gray-600">React, Vue.js, TypeScript, HTML5, CSS3</p>
-                </div>
-                <div class="text-center">
-                    <div class="w-20 h-20 mx-auto mb-4 bg-purple-100 rounded-full flex items-center justify-center">
-                        <i class="fas fa-server text-3xl text-purple-600"></i>
+                    <div class="space-y-6">
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <h3 class="text-lg font-semibold text-gray-800">Mobile Development</h3>
+                                <span class="text-purple-600 font-bold">75%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" data-width="75"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <h3 class="text-lg font-semibold text-gray-800">Database Management</h3>
+                                <span class="text-purple-600 font-bold">70%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" data-width="70"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <h3 class="text-lg font-semibold text-gray-800">DevOps & Deployment</h3>
+                                <span class="text-purple-600 font-bold">65%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" data-width="65"></div>
+                            </div>
+                        </div>
                     </div>
-                    <h3 class="text-xl font-bold mb-2 text-gray-800">Backend Development</h3>
-                    <p class="text-gray-600">Node.js, Python, PostgreSQL, MongoDB</p>
                 </div>
-                <div class="text-center">
-                    <div class="w-20 h-20 mx-auto mb-4 bg-purple-100 rounded-full flex items-center justify-center">
-                        <i class="fas fa-paint-brush text-3xl text-purple-600"></i>
+                
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mt-12">
+                    <div class="text-center scale-in">
+                        <div class="w-20 h-20 mx-auto mb-4 bg-purple-100 rounded-full flex items-center justify-center">
+                            <i class="fab fa-react text-3xl text-purple-600"></i>
+                        </div>
+                        <h3 class="text-lg font-bold mb-2 text-gray-800">React</h3>
                     </div>
-                    <h3 class="text-xl font-bold mb-2 text-gray-800">UI/UX Design</h3>
-                    <p class="text-gray-600">Figma, Adobe XD, Prototyping, User Research</p>
-                </div>
-                <div class="text-center">
-                    <div class="w-20 h-20 mx-auto mb-4 bg-purple-100 rounded-full flex items-center justify-center">
-                        <i class="fas fa-mobile-alt text-3xl text-purple-600"></i>
+                    <div class="text-center scale-in">
+                        <div class="w-20 h-20 mx-auto mb-4 bg-purple-100 rounded-full flex items-center justify-center">
+                            <i class="fab fa-vuejs text-3xl text-purple-600"></i>
+                        </div>
+                        <h3 class="text-lg font-bold mb-2 text-gray-800">Vue.js</h3>
                     </div>
-                    <h3 class="text-xl font-bold mb-2 text-gray-800">Mobile Development</h3>
-                    <p class="text-gray-600">React Native, Flutter, iOS, Android</p>
+                    <div class="text-center scale-in">
+                        <div class="w-20 h-20 mx-auto mb-4 bg-purple-100 rounded-full flex items-center justify-center">
+                            <i class="fab fa-node-js text-3xl text-purple-600"></i>
+                        </div>
+                        <h3 class="text-lg font-bold mb-2 text-gray-800">Node.js</h3>
+                    </div>
+                    <div class="text-center scale-in">
+                        <div class="w-20 h-20 mx-auto mb-4 bg-purple-100 rounded-full flex items-center justify-center">
+                            <i class="fab fa-python text-3xl text-purple-600"></i>
+                        </div>
+                        <h3 class="text-lg font-bold mb-2 text-gray-800">Python</h3>
+                    </div>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center mb-16 gradient-text">What People Say</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="testimonial-card slide-in-left">
+                    <div class="quote-mark">"</div>
+                    <p class="text-gray-600 mb-6 relative z-10">
+                        Ali is an exceptional developer who brings creativity and technical expertise to every project. His attention to detail and innovative solutions make him a valuable team member.
+                    </p>
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mr-4">
+                            <i class="fas fa-user text-purple-600"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-800">Sarah Johnson</h4>
+                            <p class="text-sm text-gray-600">CEO, TechStart</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card slide-in-right">
+                    <div class="quote-mark">"</div>
+                    <p class="text-gray-600 mb-6 relative z-10">
+                        Working with Ali was a game-changer for our project. His ability to understand complex requirements and deliver clean, efficient code is remarkable.
+                    </p>
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mr-4">
+                            <i class="fas fa-user text-purple-600"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-800">Michael Chen</h4>
+                            <p class="text-sm text-gray-600">Product Manager, InnovateCo</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card slide-in-left">
+                    <div class="quote-mark">"</div>
+                    <p class="text-gray-600 mb-6 relative z-10">
+                        Ali's design skills combined with his development expertise create truly impressive user experiences. He's a rare talent in the tech industry.
+                    </p>
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mr-4">
+                            <i class="fas fa-user text-purple-600"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-800">Emily Davis</h4>
+                            <p class="text-sm text-gray-600">UX Lead, DesignHub</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Section -->
+    <section id="blog" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center mb-16 gradient-text">Latest Blog Posts</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <article class="blog-card scale-in">
+                    <img src="https://images.unsplash.com/photo-1499750310107-5fef28a66643?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&h=250&q=80" alt="Blog post 1" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <div class="flex items-center mb-3">
+                            <span class="text-sm text-purple-600 font-medium">Web Development</span>
+                            <span class="text-sm text-gray-500 ml-auto">March 15, 2024</span>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3 text-gray-800">Building Scalable React Applications</h3>
+                        <p class="text-gray-600 mb-4">Learn the best practices for creating React apps that can handle growth and maintain performance...</p>
+                        <a href="#" class="text-purple-600 font-semibold hover:text-purple-700">Read More →</a>
+                    </div>
+                </article>
+                
+                <article class="blog-card scale-in">
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&h=250&q=80" alt="Blog post 2" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <div class="flex items-center mb-3">
+                            <span class="text-sm text-purple-600 font-medium">UI/UX Design</span>
+                            <span class="text-sm text-gray-500 ml-auto">March 10, 2024</span>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3 text-gray-800">Modern CSS Techniques</h3>
+                        <p class="text-gray-600 mb-4">Explore the latest CSS features and techniques that can transform your web designs...</p>
+                        <a href="#" class="text-purple-600 font-semibold hover:text-purple-700">Read More →</a>
+                    </div>
+                </article>
+                
+                <article class="blog-card scale-in">
+                    <img src="https://images.unsplash.com/photo-1555949963-aa79dcee981c3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&h=250&q=80" alt="Blog post 3" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <div class="flex items-center mb-3">
+                            <span class="text-sm text-purple-600 font-medium">JavaScript</span>
+                            <span class="text-sm text-gray-500 ml-auto">March 5, 2024</span>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3 text-gray-800">Async JavaScript Patterns</h3>
+                        <p class="text-gray-600 mb-4">Master asynchronous programming in JavaScript with practical examples and patterns...</p>
+                        <a href="#" class="text-purple-600 font-semibold hover:text-purple-700">Read More →</a>
+                    </div>
+                </article>
+            </div>
+            <div class="text-center mt-12">
+                <a href="#" class="px-8 py-3 bg-gradient-to-r from-purple-600 to-purple-700 text-white rounded-full font-semibold hover:from-purple-700 hover:to-purple-800 transition-all transform hover:scale-105">
+                    View All Posts
+                </a>
             </div>
         </div>
     </section>
@@ -375,6 +737,11 @@
         </div>
     </footer>
 
+    <!-- Floating Action Button -->
+    <div class="fab" id="fab">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+    
     <script src="script.js"></script>
 </body>
 </html>
