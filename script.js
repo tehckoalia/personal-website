@@ -1,25 +1,4 @@
-// Preloader
-document.addEventListener('DOMContentLoaded', () => {
-    const preloader = document.getElementById('preloader');
-    if (preloader) {
-        setTimeout(() => {
-            preloader.style.opacity = '0';
-            setTimeout(() => {
-                preloader.style.display = 'none';
-            }, 500);
-        }, 1500);
-    }
-});
-
-// Fallback to ensure preloader hides
-window.addEventListener('load', () => {
-    const preloader = document.getElementById('preloader');
-    if (preloader) {
-        setTimeout(() => {
-            preloader.style.display = 'none';
-        }, 2000);
-    }
-});
+// Website is now loading immediately without preloader
 
 // Mobile menu toggle
 const mobileMenuBtn = document.getElementById('mobile-menu-btn');
