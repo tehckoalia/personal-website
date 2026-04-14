@@ -22,6 +22,27 @@
         .hero-gradient {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         }
+        
+        /* Parallax Background */
+        .parallax {
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        
+        /* Ensure proper scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            overflow-x: hidden;
+        }
+        
+        section {
+            min-height: auto;
+        }
     </style>
 </head>
 <body class="bg-gray-50">
@@ -41,7 +62,7 @@
     </nav>
 
     <!-- Hero Section -->
-    <section id="home" class="min-h-screen flex items-center justify-center hero-gradient text-white pt-20">
+    <section id="home" class="min-h-screen flex items-center justify-center hero-gradient text-white pt-20" style="height: 100vh; overflow-y: auto;">
         <div class="container mx-auto px-6 text-center">
             <div class="mb-8">
                 <div class="w-32 h-32 mx-auto rounded-full mb-6 shadow-2xl border-4 border-white overflow-hidden">
@@ -167,12 +188,12 @@
     </section>
 
     <script>
-        // Enhanced animations on page load
-        document.addEventListener('DOMContentLoaded', () => {
+        // Simple animations on page load
+        document.addEventListener('DOMContentLoaded', function() {
             // Animate elements with specific classes
             const animateElements = document.querySelectorAll('.animate-fade-in, .animate-slide-up, .animate-slide-left, .animate-slide-right, .animate-scale');
-            animateElements.forEach((el, index) => {
-                setTimeout(() => {
+            animateElements.forEach(function(el, index) {
+                setTimeout(function() {
                     el.style.opacity = '1';
                     el.style.transform = 'translateY(0)';
                 }, index * 100);
@@ -180,38 +201,28 @@
             
             // Counter animation for statistics
             const counters = document.querySelectorAll('.animate-counter');
-            const counterObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const counter = entry.target;
-                        const target = parseInt(counter.textContent);
-                        let current = 0;
-                        const increment = target / 50;
-                        const timer = setInterval(() => {
-                            current += increment;
-                            if (current < target) {
-                                counter.textContent = Math.ceil(current) + '+';
-                            } else {
-                                counter.textContent = target + '+';
-                                clearInterval(timer);
-                            }
-                        }, 30);
-                        counterObserver.unobserve(counter);
+            counters.forEach(function(counter) {
+                const target = parseInt(counter.textContent);
+                let current = 0;
+                const increment = target / 50;
+                const timer = setInterval(function() {
+                    current += increment;
+                    if (current < target) {
+                        counter.textContent = Math.ceil(current) + '+'; 
+                    } else {
+                        counter.textContent = target + '+'; 
+                        clearInterval(timer);
                     }
-                });
-            }, { threshold: 0.5 });
-            
-            counters.forEach(counter => {
-                counterObserver.observe(counter);
+                }, 30);
             });
             
             // Add hover effects to interactive elements
             const hoverElements = document.querySelectorAll('.hover-lift');
-            hoverElements.forEach(el => {
-                el.addEventListener('mouseenter', () => {
+            hoverElements.forEach(function(el) {
+                el.addEventListener('mouseenter', function() {
                     el.style.transform = 'translateY(-8px) scale(1.02)';
                 });
-                el.addEventListener('mouseleave', () => {
+                el.addEventListener('mouseleave', function() {
                     el.style.transform = 'translateY(0) scale(1)';
                 });
             });
