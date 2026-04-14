@@ -53,9 +53,11 @@
                 <div class="text-2xl font-bold gradient-text">Ali Abdulov</div>
                 <div class="hidden md:flex space-x-8">
                     <a href="#home" class="text-gray-700 hover:text-purple-600">Home</a>
+                    <a href="#about" class="text-gray-700 hover:text-purple-600">About</a>
                     <a href="#services" class="text-gray-700 hover:text-purple-600">Services</a>
                     <a href="#statistics" class="text-gray-700 hover:text-purple-600">Stats</a>
                     <a href="#projects" class="text-gray-700 hover:text-purple-600">Projects</a>
+                    <a href="#contact" class="text-gray-700 hover:text-purple-600">Contact</a>
                 </div>
             </div>
         </div>
@@ -99,6 +101,43 @@
                 <a href="mailto:eleshik2016@gmail.com" class="text-white hover:text-gray-200 transition-colors transform hover:scale-110">
                     <i class="fas fa-envelope text-2xl"></i>
                 </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Me Section -->
+    <section id="about" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center mb-16 gradient-text">About Me</h2>
+            <div class="max-w-4xl mx-auto">
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div class="text-center md:text-left">
+                        <div class="mb-8">
+                            <div class="w-32 h-32 mx-auto md:mx-0 rounded-full mb-6 shadow-2xl border-4 border-purple-200 overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1461749280689-dccba630e2f6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&h=400&q=80" alt="Ali Abdulov" class="w-full h-full object-cover">
+                            </div>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-4 text-gray-800">Hi, I'm Ali Abdulov</h3>
+                        <p class="text-lg text-gray-600 mb-6 leading-relaxed">
+                            I'm a passionate creative developer and digital artist with a love for building beautiful, functional web experiences. My journey in tech has been driven by curiosity and a desire to solve real-world problems through innovative solutions.
+                        </p>
+                        <p class="text-lg text-gray-600 mb-6 leading-relaxed">
+                            With expertise in modern web technologies and a keen eye for design, I transform ideas into engaging digital products that users love. I believe in clean code, intuitive interfaces, and creating experiences that make a difference.
+                        </p>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="text-center p-4 bg-purple-50 rounded-lg">
+                                <i class="fas fa-code text-2xl text-purple-600 mb-2"></i>
+                                <h4 class="font-semibold text-gray-800">Frontend</h4>
+                                <p class="text-sm text-gray-600">React, Vue, TypeScript</p>
+                            </div>
+                            <div class="text-center p-4 bg-blue-50 rounded-lg">
+                                <i class="fas fa-server text-2xl text-blue-600 mb-2"></i>
+                                <h4 class="font-semibold text-gray-800">Backend</h4>
+                                <p class="text-sm text-gray-600">Node.js, Python, SQL</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -187,6 +226,45 @@
         </div>
     </section>
 
+    <!-- Contact Me Section -->
+    <section id="contact" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center mb-16 gradient-text">Get In Touch</h2>
+            <div class="max-w-4xl mx-auto">
+                <div class="bg-white rounded-2xl shadow-xl p-8">
+                    <form id="contact-form" class="space-y-6">
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-gray-700 font-medium mb-2">Name</label>
+                                <input type="text" id="name" name="name" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all" placeholder="Your Name">
+                            </div>
+                            <div>
+                                <label class="block text-gray-700 font-medium mb-2">Email</label>
+                                <input type="email" id="email" name="email" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all" placeholder="your@email.com">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 font-medium mb-2">Subject</label>
+                            <input type="text" id="subject" name="subject" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all" placeholder="How can I help?">
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 font-medium mb-2">Message</label>
+                            <textarea id="message" name="message" rows="5" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all resize-none" placeholder="Tell me about your project..."></textarea>
+                        </div>
+                        <div class="text-center">
+                            <button type="submit" class="px-8 py-3 bg-gradient-to-r from-purple-600 to-purple-700 text-white rounded-full font-semibold hover:from-purple-700 hover:to-purple-800 transition-all transform hover:scale-105 shadow-lg">
+                                Send Message
+                            </button>
+                        </div>
+                    </form>
+                    <div id="success-message" class="hidden mt-6 p-4 bg-green-50 border border-green-200 rounded-lg text-green-700 text-center">
+                        Thank you for your message! I'll get back to you soon.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <script>
         // Simple animations on page load
         document.addEventListener('DOMContentLoaded', function() {
@@ -243,6 +321,40 @@
                 }
             });
         });
+        
+        // Contact form handling
+        const contactForm = document.getElementById('contact-form');
+        const successMessage = document.getElementById('success-message');
+        
+        if (contactForm) {
+            contactForm.addEventListener('submit', function (e) {
+                e.preventDefault();
+                
+                // Get form data
+                const formData = {
+                    name: document.getElementById('name').value,
+                    email: document.getElementById('email').value,
+                    subject: document.getElementById('subject').value,
+                    message: document.getElementById('message').value
+                };
+                
+                // Simulate form submission
+                console.log('Form submitted:', formData);
+                
+                // Show success message
+                successMessage.classList.remove('hidden');
+                
+                // Reset form
+                contactForm.reset();
+                
+                // Hide success message after 5 seconds
+                setTimeout(function() {
+                    successMessage.classList.add('hidden');
+                }, 5000);
+            });
+        }
+        
+        console.log('Enhanced website loaded successfully!');
     </script>
 </body>
 </html>
